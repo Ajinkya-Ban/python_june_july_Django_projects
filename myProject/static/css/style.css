@@ -1,0 +1,16 @@
+.text-adjust
+{
+    text-align:justify;
+    padding:5px;
+}
+ .contact-tab
+ {
+    width:49%;
+ }
+@media only screen and (max-width:749px)
+{
+    .contact-tab
+    {
+        width: 100%;
+    }
+}
