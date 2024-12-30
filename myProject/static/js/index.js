@@ -51,7 +51,7 @@ function validatePhoneNumber() {
     if(!isValid){
         alert("Please enter a valid 10-digit phone number.")
 //        document.getElementById("mobile").focus();
-        document.getElementById("mobile").value="";
+//        document.getElementById("mobile").value="";
     }
 
     // Return validation status
@@ -73,7 +73,7 @@ function validateEmail(emailField){
         if (reg.test(emailField.value) == false)
         {
             alert('Invalid Email, Please check and try again');
-            document.getElementById("email").value=""
+//            document.getElementById("email").value=""
             return false;
         }
         return true;

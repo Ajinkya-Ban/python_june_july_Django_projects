@@ -66,10 +66,14 @@ WSGI_APPLICATION = 'myProject.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+	'default': {
+		'ENGINE': 'django.db.backends.mysql',
+		'NAME': 'django_june_july',
+		'USER': 'root',
+		'PASSWORD': 'admin123',
+		'HOST':'localhost',
+		'PORT':'3306',
+	}
 }
 
 
@@ -118,100 +122,37 @@ STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
 
-# JAZZMIN_SETTINGS = {
-#     # title of the window (Will default to current_admin_site.site_title if absent or None)
-#     "site_title": "First Project",
-#
-#     # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-#     "site_header": "Library",
-#
-# # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-#     "site_brand": "Doctor Pricription",
-#
-# # Logo to use for your site, must be present in static files, used for brand on top left
-#     "site_logo": "/img/doc2.png",
-#
-# # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
-#     "login_logo": None,
-#
-#     # Logo to use for login form in dark themes (defaults to login_logo)
-#     "login_logo_dark": None,
-#
-# # Welcome text on the login screen
-#     "welcome_sign": "Welcome to the clinic",
-#
-#     # Copyright on the footer
-#     "copyright": "Acme Clinic Ltd",
-#     # List of model admins to search from the search bar, search bar omitted if excluded
-#     # If you want to use a single search field you dont need to use a list, you can use a simple string
-#     "search_model": ["auth.User", "auth.Group"],
-#
-# # Links to put along the top menu
-#     "topmenu_links": [
-#
-#         # Url that gets reversed (Permissions can be added)
-#         {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
-#
-#         # external url that opens in a new window (Permissions can be added)
-#         {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
-#
-#         # model admin to link to (Permissions checked against model)
-#         {"model": "auth.User"},
-#
-#         # App with dropdown menu to all its models pages (Permissions checked against models)
-#         {"app": "books"},
-#     ],
-#     # Whether to display the side menu
-#     "show_sidebar": True,
-#     # Whether to aut expand the menu
-#     "navigation_expanded": True,
-#     # Hide these apps when generating side menu e.g (auth)
-#     "hide_apps": [],
-# # Custom links to append to app groups, keyed on app name
-#     "custom_links": {
-#         "auth": [{
-#             "name": "Download Code",
-#             "url": "https://github.com/farridav/django-jazzmin/issues",
-#             "icon": "fa-solid fa-envelope",
-#             "permissions": ["auth.User"]
-#         }]
-#     },
-#
-#     "icons": {
-#         "auth": "fas fa-users-cog",
-#         "auth.user": "fa-brands fa-twitter",
-#         "auth.Group": "fas fa-users",
-#     },
-#     # Whether to show the UI customizer on the sidebar
-#     "show_ui_builder": True,
-#     "changeform_format": "carousel",
-# }
+JAZZMIN_SETTINGS = {
+    # title of the window (Will default to current_admin_site.site_title if absent or None)
+    "search_model": ["myapp.contact"],
+"show_ui_builder": False,
+}
 
 # JAZZMIN_UI_TWEAKS = {
 #     "navbar_small_text": False,
 #     "footer_small_text": False,
-#     "body_small_text": True,
+#     "body_small_text": False,
 #     "brand_small_text": False,
-#     "brand_colour": "navbar-orange",
-#     "accent": "accent-warning",
-#     "navbar": "navbar-dark",
+#     "brand_colour": "navbar-success",
+#     "accent": "accent-fuchsia",
+#     "navbar": "navbar-white navbar-light",
 #     "no_navbar_border": False,
 #     "navbar_fixed": False,
 #     "layout_boxed": False,
 #     "footer_fixed": False,
 #     "sidebar_fixed": False,
-#     "sidebar": "sidebar-light-lightblue",
+#     "sidebar": "sidebar-light-danger",
 #     "sidebar_nav_small_text": False,
 #     "sidebar_disable_expand": False,
 #     "sidebar_nav_child_indent": False,
-#     "sidebar_nav_compact_style": True,
+#     "sidebar_nav_compact_style": False,
 #     "sidebar_nav_legacy_style": False,
 #     "sidebar_nav_flat_style": False,
-#     "theme": "cyborg",
-#     "dark_mode_theme": None,
+#     "theme": "journal",
+#     "dark_mode_theme": "cyborg",
 #     "button_classes": {
-#         "primary": "btn-primary",
-#         "secondary": "btn-secondary",
+#         "primary": "btn-outline-primary",
+#         "secondary": "btn-outline-secondary",
 #         "info": "btn-info",
 #         "warning": "btn-warning",
 #         "danger": "btn-danger",
