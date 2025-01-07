@@ -1,10 +1,134 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>About</title>
-</head>
-<body>
-<h1>About page</h1>
-</body>
-</html>
+{% extends 'myapp/index.html' %}
+{% block title %}Register-MySite{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="container">
+    <div class="row">
+        <h2 class="text-center p-3">Please fill this Form</h2>
+        <div class="col-md-6 col-12 d-flex justify-content-center">
+            <img src="/static/img/regi.jpg" class="w-100 img-thumbnail img-fluid">
+        </div>
+        <div class="col-md-6 col-12 mt-4">
+            <form method="post" action="{% url 'submit_register' %}">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-12">
+                        <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+                            <input type="text" class="form-control" placeholder="Full Name" aria-label="Username"
+                                   aria-describedby="basic-addon1" id="fname" name="fullname">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="input-group mb-3">
+                        <span class="input-group-text">
+                          <i class="fa-solid fa-phone"></i>
+                        </span>
+                            <input type="text" class="form-control" placeholder="Enter Mobile" aria-label="Enter Mobile"
+                                   aria-describedby="basic-addon1" id="mobile" name="mobile">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="input-group mb-3">
+                        <span class="input-group-text">
+                         <i class="fa-regular fa-envelope"></i>
+                        </span>
+                            <input type="text" class="form-control" placeholder="Enter Email" aria-label="Enter Mobile"
+                                   aria-describedby="basic-addon1" id="email" name="email">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa-solid fa-address-card"></i></span>
+                            <textarea class="form-control" aria-label="With textarea" id="add" name="add"></textarea>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-12">
+
+                        <select class="form-select" aria-label="Default select example" id="country" name="country">
+                            <option selected>Open this select Country</option>
+                            <option value="ind">India</option>
+                            <option value="uk">UK</option>
+                            <option value="pak">Pakistan</option>
+                            <option value="aus">Austrilia</option>
+                            <option value="USA">United State of America</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-12">
+
+                        <select class="form-select" aria-label="Default select example" id="state" name="state">
+                            <option selected>Open this select State</option>
+                            <option value="mh">Maharashtra</option>
+                            <option value="up">Utter Pradesh</option>
+                            <option value="mp">Madhya Pradesh</option>
+                            <option value="guj">Gujrat</option>
+                            <option value="goa">Goa</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <div class="input-group mb-3">
+                        <span class="input-group-text">
+                        <i class="fa-solid fa-city"></i>
+                        </span>
+                            <input type="text" class="form-control" placeholder="Enter City" aria-label="Enter City"
+                                   aria-describedby="basic-addon1" id="city" name="city">
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Default file input example</label>
+                            <input class="form-control" type="file" id="formFile" name="profile_image" accept="image/*">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-6 col-12">
+                        <button type="submit" class="btn btn-primary w-100">Submit</button>
+                    </div>
+
+                    <div class="col-md-6 col-12 mt-2 mt-md-0">
+                        <button type="button" class="btn btn-warning w-100">Clear</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
