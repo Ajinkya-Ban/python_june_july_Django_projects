@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Contact, Register
-
+from django.core.exceptions import ValidationError
 
 # Create your views here.
 def getHomePage(request):
@@ -35,6 +35,7 @@ def submit_contact(request):
 def submit_register(request):
     if request.method == "POST":
         fullname = request.POST.get("fullname")
+        gender = request.POST.get("gender")
         mobile = request.POST.get("mobile")
         email = request.POST.get("email")
         address = request.POST.get("add")
@@ -44,8 +45,9 @@ def submit_register(request):
         profile_image = request.FILES.get("profile_image")
 
         # Save all the form values, including the selected ones, to the database
-        Register.objects.create(
+        register=Register(
             fullname=fullname,
+            gender=gender,
             mobile=mobile,
             email=email,
             address=address,
@@ -54,6 +56,13 @@ def submit_register(request):
             city=city,
             profile_image=profile_image
         )
-        return render(request, "myapp/success.html")
-    return render(request, "myapp/register.html")
+        try:
+            register.save()
+            return render(request, "myapp/success.html")
 
+        except ValidationError as err:
+            return render(request, "myapp/register.html",{
+                "error":err.message_dict,
+                "data":request.POST
+            })
+    return render(request, "myapp/register.html")

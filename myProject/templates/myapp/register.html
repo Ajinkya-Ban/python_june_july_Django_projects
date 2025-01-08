@@ -11,8 +11,20 @@
             <img src="/static/img/regi.jpg" class="w-100 img-thumbnail img-fluid">
         </div>
         <div class="col-md-6 col-12 mt-4">
-            <form method="post" action="{% url 'submit_register' %}">
+            <form method="post" action="{% url 'submit_register' %}" enctype="multipart/form-data">
                 {% csrf_token %}
+                {% if error %}
+                <ul>
+                    {% for field,messages in error.items %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <li class="ms-4"> {{field}} : {{messages|join:", "}}</li>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+                    </div>
+                    {% endfor %}
+
+                </ul>
+                {% endif %}
                 <div class="row">
                     <div class="col-12">
                         <div class="input-group mb-3">
@@ -21,6 +33,28 @@
                         </span>
                             <input type="text" class="form-control" placeholder="Full Name" aria-label="Username"
                                    aria-describedby="basic-addon1" id="fname" name="fullname">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-12">
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="inlineRadio1"
+                                   value="male">
+                            <label class="form-check-label" for="inlineRadio1">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="inlineRadio2"
+                                   value="female">
+                            <label class="form-check-label" for="inlineRadio2">Female</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="inlineRadio3"
+                                   value="other">
+                            <label class="form-check-label" for="inlineRadio3">Other</label>
                         </div>
 
                     </div>
