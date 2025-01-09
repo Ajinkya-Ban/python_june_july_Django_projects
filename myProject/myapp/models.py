@@ -36,12 +36,14 @@ class Register(models.Model):
         return self.fullname
 
     def clean(self):
+        errors ={}
         if Register.objects.filter(email=self.email).exclude(pk=self.pk).exists():
-            raise ValidationError({"email":"email already exists"})
+            errors["email"] = "Email already exists"
 
         if Register.objects.filter(mobile=self.mobile).exclude(pk=self.pk).exists():
-            raise ValidationError({"mobile": "mobile number already exists"})
-
+            errors["mobile"] = "Mobile number already exists"
+        if errors:
+            raise ValidationError(errors)
     def save(self, *args, **kwargs):
         self.full_clean()
         super(Register, self).save(*args, **kwargs)
