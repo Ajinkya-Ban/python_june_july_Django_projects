@@ -10,7 +10,8 @@ def getHomePage(request):
 
 
 def getRegisterPage(request):
-    return render(request, "myapp/register.html")
+    users = Register.objects.all()
+    return render(request, "myapp/register.html",{'users':users})
 
 
 def getProductPage(request):
@@ -69,5 +70,12 @@ def submit_register(request):
             })
     return render(request, "myapp/register.html")
 
+def edit_user(request,id):
+    pass
 
+def delete_user(request,user_id):
+    user = Register.objects.get(id=user_id)
+    getAllUser = Register.objects.all()
+    user.delete()
+    return redirect('register')
 
