@@ -1,6 +1,6 @@
 {% extends 'myapp/index.html' %}
 {% block title %}Edit User{% endblock %}
-
+{% load static %}
 {% block content %}
 
 <div class="container">
@@ -78,7 +78,7 @@
                     <div class="col-12">
                         <div class="input-group">
                             <span class="input-group-text"><i class="fa-solid fa-address-card"></i></span>
-                            <textarea class="form-control" aria-label="With textarea" id="add" name="add" value="{{form.address.value}}"></textarea>
+                            <textarea class="form-control" aria-label="With textarea" id="add" name="add">{{ form.address.value }}</textarea>
                         </div>
 
                     </div>
@@ -87,14 +87,13 @@
                 <div class="row mt-3">
                     <div class="col-12">
 
-                        <select class="form-select" aria-label="Default select example" id="country" name="country" value
-                        ="{{form.country.value.select}}">
+                        <select class="form-select" aria-label="Default select example" id="country" name="country">
                             <option selected>Open this select Country</option>
-                            <option value="ind">India</option>
-                            <option value="uk">UK</option>
-                            <option value="pak">Pakistan</option>
-                            <option value="aus">Austrilia</option>
-                            <option value="USA">United State of America</option>
+                            <option value="ind" {% if form.country.value == "ind" %}selected{% endif %}>India</option>
+                            <option value="uk" {% if form.country.value == "uk" %}selected{% endif %}>UK</option>
+                            <option value="pak" {% if form.country.value == "pak" %}selected{% endif %}>Pakistan</option>
+                            <option value="aus" {% if form.country.value == "aus" %}selected{% endif %}>Austrilia</option>
+                            <option value="USA" {% if form.country.value == "usa" %}selected{% endif %}>United State of America</option>
                         </select>
                     </div>
 
@@ -105,11 +104,11 @@
 
                         <select class="form-select" aria-label="Default select example" id="state" name="state">
                             <option selected>Open this select State</option>
-                            <option value="mh">Maharashtra</option>
-                            <option value="up">Utter Pradesh</option>
-                            <option value="mp">Madhya Pradesh</option>
-                            <option value="guj">Gujrat</option>
-                            <option value="goa">Goa</option>
+                            <option value="mh" {% if form.state.value == "mh" %}selected{% endif %}>Maharashtra</option>
+                            <option value="mp" {% if form.state.value == "mp" %}selected{% endif %}>Madhya Pradesh</option>
+                            <option value="up" {% if form.state.value == "up" %}selected{% endif %}>Utter Pradesh</option>
+                            <option value="guj" {% if form.state.value == "guj" %}selected{% endif %}>Gujrat</option>
+                            <option value="goa" {% if form.state.value == "goa" %}selected{% endif %}>Goa</option>
                         </select>
                     </div>
 
@@ -133,9 +132,28 @@
                     <div class="col-12">
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Default file input example</label>
-                            <input class="form-control" type="file" id="formFile" name="profile_image" accept="image/*" value="{{form.profile_image.value}}">
+                            <input class="form-control" type="file" id="formFile" name="profile_image" accept="image/*" value="{{form.profile_image.value.url}}">
                         </div>
 
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <div class="mb-3 text-center">
+    {% if form.profile_image.value %}
+        <img
+            src="{{ form.profile_image.value.url }}"
+            alt="Profile Image"
+            class="img-thumbnail"
+            style="width: 150px; height: 150px; object-fit: cover;">
+    {% else %}
+        <img
+            src="{% static 'images/default.jpg' %}"
+            alt="Default Image"
+            class="img-thumbnail"
+            style="width: 150px; height: 150px; object-fit: cover;">
+    {% endif %}
+</div>
                     </div>
                 </div>
 

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Contact, Register
 from django.core.exceptions import ValidationError
 from .editform import EditUserForm
@@ -70,16 +70,21 @@ def submit_register(request):
             })
     return render(request, "myapp/register.html")
 
-def edit_user(request,user_id):
-    user = Register.objects.get(id=user_id)
+
+
+def edit_user(request, user_id):
+    user = get_object_or_404(Register, id=user_id)
     if request.method == "POST":
         form = EditUserForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()
             return redirect('register')
+        else:
+            print(form.errors)  # Log errors for debugging
     else:
         form = EditUserForm(instance=user)
-    return render(request, 'myapp/edit_user.html',{'form':form})
+    return render(request, 'myapp/edit_user.html', {'form': form})
+
 
 
 def delete_user(request,user_id):
