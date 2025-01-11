@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Contact, Register
 from django.core.exceptions import ValidationError
-
+from .editform import EditUserForm
 
 # Create your views here.
 def getHomePage(request):
@@ -70,12 +70,23 @@ def submit_register(request):
             })
     return render(request, "myapp/register.html")
 
-def edit_user(request,id):
-    pass
+def edit_user(request,user_id):
+    user = Register.objects.get(id=user_id)
+    if request.method == "POST":
+        form = EditUserForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('register')
+    else:
+        form = EditUserForm(instance=user)
+    return render(request, 'myapp/edit_user.html',{'form':form})
+
 
 def delete_user(request,user_id):
     user = Register.objects.get(id=user_id)
-    getAllUser = Register.objects.all()
+    # getAllUser = Register.objects.all()
     user.delete()
     return redirect('register')
+
+
 
