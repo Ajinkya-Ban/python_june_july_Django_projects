@@ -1,3 +1,4 @@
+import os
 from django.db import models
 from django.core.exceptions import ValidationError
 
@@ -23,7 +24,7 @@ class Register(models.Model):
     gender = models.CharField(max_length=10, default=None)
     mobile = models.BigIntegerField()
     email = models.EmailField()
-    address = models.TextField()
+    address = models.TextField(blank=True, null=True)
     country =  models.CharField(max_length=15)
     state = models.CharField(max_length=15)
     city = models.CharField(max_length=15)
@@ -45,6 +46,16 @@ class Register(models.Model):
         if errors:
             raise ValidationError(errors)
     def save(self, *args, **kwargs):
+        if self.pk:
+            existingUser = Register.objects.get(pk = self.pk)
+            if existingUser.profile_image and existingUser.profile_image !=self.profile_image:
+                if os.path.isfile(existingUser.profile_image.path):
+                    os.remove(existingUser.profile_image.path)
         self.full_clean()
         super(Register, self).save(*args, **kwargs)
 
+    def delete(self, *args, **kwargs):
+        if self.profile_image:
+            if os.path.isfile(self.profile_image.path):
+                os.remove(self.profile_image.path)
+        super().delete(*args, **kwargs)
