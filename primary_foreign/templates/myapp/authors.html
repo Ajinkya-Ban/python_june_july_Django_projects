@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <ul>
+        {% for auth in authors %}
+        <li>
+            <h2>{{auth.name}} (Age :{{auth.age}})</h2>
+
+            <ul>
+                {% for book in auth.books.all %}
+                <li>
+                   <p>{{book.title}} - Publish On {{book.publication_date}}</p>
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+
+
+        {% endfor %}
+    </ul>
+</body>
+</html>
