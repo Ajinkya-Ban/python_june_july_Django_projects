@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Contact, Register
 from django.core.exceptions import ValidationError
 from .editform import EditUserForm
+from django.core.mail import send_mail
 
 # Create your views here.
 def getHomePage(request):
@@ -33,6 +34,10 @@ def submit_contact(request):
         message = request.POST.get("msg")
 
         Contact.objects.create(fname=fname, lname=lname, mobile=mobile, email=email, message=message)
+        subject = f"New Contact from {fname}"
+        body = f"Name : {fname} \n\n Email : {email} \n\n Message : {message}"
+        send_mail(subject,body,email,["paypalajinkya@gmail.com"])
+
         return render(request, "myapp/success.html")
     return redirect(request, "myapp/contact.html")
 
