@@ -5,7 +5,7 @@ from .models import CarDetails
 from .api_file.serializers import CarSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-
+from rest_framework import status
 
 # def car_list(req):
 #     cars = CarDetails.objects.all()
@@ -41,10 +41,13 @@ def car_list(request):
             return Response(serializer.errors)
 
 
-@api_view(['GET', 'PUT'])
+@api_view(['GET', 'PUT','DELETE'])
 def car_details(request, pk):
     if request.method == 'GET':
-        cars = CarDetails.objects.get(pk=pk)
+        try:
+            cars = CarDetails.objects.get(pk=pk)
+        except:
+            return Response({"Error":"car not found"},status=status.HTTP_204_NO_CONTENT)
         serializer = CarSerializer(cars)
         return Response(serializer.data)
     if request.method == 'PUT':
@@ -54,4 +57,9 @@ def car_details(request, pk):
             serializer.save()
             return Response(serializer.data)
         else:
-            return Response(serializer.errors)
+            return Response(serializer.errors, status=status.HTTP_204_NO_CONTENT)
+
+    if request.method == "DELETE":
+        cars = CarDetails.objects.get(pk=pk)
+        cars.delete()
+        return Response({"message":"data deleted"})
