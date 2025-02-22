@@ -10,3 +10,14 @@ class CarDetails(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class CustomerDetails(models.Model):
+    cust_name = models.CharField(max_length=60)
+    mobile = models.CharField(max_length=10)
+    email = models.EmailField()
+    city = models.CharField(max_length=20)
+    car = models.ForeignKey(CarDetails, on_delete=models.CASCADE, related_name="customers")
+
+    def __str__(self):
+        return self.name

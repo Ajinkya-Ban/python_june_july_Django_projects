@@ -1,0 +1,14 @@
+Nested serializers data:
+-------------------------------
+{
+        "cust_name": "Ajinkya Ban",
+        "mobile": "9822997600",
+        "email": "ajinkya@gmail.com",
+        "city": "Pune",
+        "car": {
+            "name": "BMW",
+            "description": "This is newly launched car",
+            "price": 23,
+            "active": true
+        }
+}
